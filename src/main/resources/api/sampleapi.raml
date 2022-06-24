@@ -1,0 +1,54 @@
+#%RAML 1.0
+title: SampleAPI
+baseUri:   
+protocols: [HTTP,HTTPS]
+version: v1
+mediaType: 
+- application/json
+securitySchemes:
+  security: !include security schema/securityScheme.raml  
+traits:
+    error: !include traits/trait.raml  
+  
+/student:
+  is:
+    - error
+  
+        
+  get:
+    description: Student Details
+    displayName: get the details 
+     
+    responses:
+      200:
+        body:
+          application/json:
+            
+            example: !include example/example.raml
+            type: !include datatypes/dataType.raml
+  post:
+      displayName: Insert the Details
+      
+      body:
+          application/json:
+              example: !include example/example.raml
+              type:    !include datatypes/dataType.raml
+
+      responses:
+        201:
+          body:
+            application/json:
+              example:
+                {
+                  Status: Updated Successfully 
+                }
+                
+                                                    
+
+                        
+              
+                          
+          
+
+
+  
