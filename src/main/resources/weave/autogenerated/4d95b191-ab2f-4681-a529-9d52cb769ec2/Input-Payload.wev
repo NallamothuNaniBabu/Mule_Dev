@@ -1,0 +1,11 @@
+%dw 2.0
+
+type auto_4d95b191_ab2f_4681_a529_9d52cb769ec2_Input_Payload = {
+  address: String, 
+  mobile: String, 
+  company: String, 
+  age: String, 
+  Name: String, 
+  _?: Any
+}
+

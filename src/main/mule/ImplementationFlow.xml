@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:os="http://www.mulesoft.org/schema/mule/os" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/os http://www.mulesoft.org/schema/mule/os/current/mule-os.xsd">
+	<os:object-store name="Object_store" doc:name="Object store" doc:id="089ee2a6-bc4d-444d-9a5c-c83aafba68d5" />
+	<flow name="ImplementationGetFlow" doc:id="d31c0ec6-ae56-4bab-8066-a030af1c0f39" >
+		<logger level="INFO" doc:name="Logger" doc:id="fb0afa6b-08ae-49f4-85d6-eccd1cc4fa05" message='#["request is coming for data"]'/>
+		<os:retrieve doc:name="Retrieve" doc:id="e8892d0a-facb-47c2-923d-aa18460270a6" key="9" objectStore="Object_store"/>
+		<ee:transform doc:name="Transform Message" doc:id="41a8b31c-6f48-423a-98f2-ce2945ff940d" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/xml
+---
+root: payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="c11512b1-15af-4ea9-b59b-1e7d5c224e17" message='#["data fetching completed"]'/>
+		<error-handler ref="GlobalErrorhandlerError_Handler" />
+	</flow>
+	<flow name="ImplementationPostFlow" doc:id="4d95b191-ab2f-4681-a529-9d52cb769ec2" >
+		<logger level="INFO" doc:name="Logger" doc:id="e9095936-33b2-4ed2-83a2-4c9ed7955a26" message="#[payload]" />
+		<os:store doc:name="Store" doc:id="967137e7-f87d-463b-97b8-ea4b77d2126f" key="9" objectStore="Object_store" />
+		<ee:transform doc:name="Transform Message" doc:id="1338602a-b18a-427b-8699-67636013eb4c">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  Status: "updated Successfully"
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="67de569b-e821-4378-a041-2e240d17ab13" message='#["data stored completed"]' />
+		<error-handler ref="GlobalErrorhandlerError_Handler" />
+	</flow>
+</mule>

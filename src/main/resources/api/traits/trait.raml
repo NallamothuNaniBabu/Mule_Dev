@@ -1,0 +1,22 @@
+#%RAML 1.0 Trait
+headers:
+  clientid:
+    type: string
+    minLength: 5
+    
+  clientsecret:
+    type: string  
+    maxLength: 10
+     
+responses:
+      400:
+        body:
+            example:
+                  Error : server error
+      500:
+        body:
+            example:
+              Error: Internal error
+                                                
+                  
+                  

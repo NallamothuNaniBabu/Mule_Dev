@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd">
+	<configuration doc:name="Configuration" doc:id="18bbdf96-193b-48ad-9b05-9c3990488473" defaultErrorHandler-ref="GlobalErrorhandlerError_Handler" />
+	<api-gateway:autodiscovery apiId="17919678" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="a02716c4-c192-49da-bb64-2583a05707ef" flowRef="sampleapi-main" />
+	<error-handler name="GlobalErrorhandlerError_Handler" doc:id="36f7970a-37a6-4ee5-b566-1267032431b8" >
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="0ebe0ec3-7ede-432e-b882-ba967b4e6503" >
+			<logger level="INFO" doc:name="Logger" doc:id="661b1a99-0a42-4f14-9208-5129d5cccf58" message='#["exception occurred"]'/>
+		</on-error-propagate>
+	</error-handler>
+</mule>

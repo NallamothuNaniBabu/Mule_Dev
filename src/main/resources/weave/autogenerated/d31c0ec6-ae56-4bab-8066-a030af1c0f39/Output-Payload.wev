@@ -1,0 +1,11 @@
+%dw 2.0
+
+type auto_d31c0ec6_ae56_4bab_8066_a030af1c0f39_Output_Payload = {
+  address: String, 
+  mobile: String, 
+  company: String, 
+  age: String, 
+  Name: String, 
+  _?: Any
+}
+
